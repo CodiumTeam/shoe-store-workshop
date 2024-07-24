@@ -16,7 +16,7 @@ export function getDiscount(
     totalQuantity += products[index].quantity;
   }
 
-  if (userType === UserType.VIP) {
+  if (UserType.isVip(userType)) {
     let result = 0;
     switch (totalQuantity) {
       case 0:
@@ -37,7 +37,7 @@ export function getDiscount(
       tmpDiscount += 5; // VIP customers get an additional 5% discount
     }
     discount = tmpDiscount;
-  } else if (userType === UserType.REGISTER) {
+  } else if (UserType.isRegister(userType)) {
     let discountPercent = 0;
     if (totalQuantity <= 3) {
       if (totalQuantity === 1) {
@@ -56,7 +56,7 @@ export function getDiscount(
         discount = discountPercent;
       }
     }
-  } else if (userType === UserType.GUEST) {
+  } else if (UserType.isGuest(userType)) {
     const guestDiscount = 0;
     if (totalQuantity) {
       discount = guestDiscount;
