@@ -1,7 +1,10 @@
 import { Product } from '../products.ts';
 import { UserType } from '../models/UserType.ts';
 
-function DiscountVipBanner(props: {
+function DiscountVipBanner({
+  discount,
+  maxvipdiscount,
+}: {
   discount: number;
   maxvipdiscount: number;
 }) {
@@ -16,13 +19,12 @@ function DiscountVipBanner(props: {
         </p>
         <p className='font-semibold mr-2 text-left flex-auto'>
           As a valued <strong>VIP member</strong>, enjoy a special discount of{' '}
-          {props.discount}% on all purchases.{' '}
-          {props.discount !== props.maxvipdiscount && (
+          {discount}% on all purchases.{' '}
+          {discount !== maxvipdiscount && (
             <>
               <br />
               <span className='font-normal mr-2 mt-2 inline-block text-left flex-auto'>
-                Add more products to get {props.maxvipdiscount}% on this
-                purchase
+                Add more products to get {maxvipdiscount}% on this purchase
               </span>
             </>
           )}
@@ -32,7 +34,11 @@ function DiscountVipBanner(props: {
   );
 }
 
-function RegisterBanner(props: {
+function RegisterDiscountBanner({
+  discount,
+  maxregisterdiscount,
+  maxvipdiscount,
+}: {
   discount: number;
   maxregisterdiscount: number;
   maxvipdiscount: number;
@@ -45,13 +51,12 @@ function RegisterBanner(props: {
         </h2>
         <p className='text-white text-xs text-center mb-6'>
           <span className={'underline'}>
-            You are getting {props.discount}% now.
+            You are getting {discount}% now.
             <br />
           </span>
-          {props.discount !== props.maxregisterdiscount && (
+          {discount !== maxregisterdiscount && (
             <span>
-              Add more products to get {props.maxregisterdiscount}% on this
-              purchase
+              Add more products to get {maxregisterdiscount}% on this purchase
             </span>
           )}
         </p>
@@ -59,7 +64,7 @@ function RegisterBanner(props: {
         <p className='text-white text-base text-center mb-6'>
           Upgrade your account to VIP and get{' '}
           <span className='underline font-bold'>
-            {props.maxvipdiscount}% discount
+            {maxvipdiscount}% discount
           </span>{' '}
           for this purchase.
         </p>
@@ -89,7 +94,13 @@ function RegisterBanner(props: {
   );
 }
 
-function GuestBanner(props: { discount: number; maxregisterdiscount: number }) {
+function GuestDiscountBanner({
+  discount,
+  maxregisterdiscount,
+}: {
+  discount: number;
+  maxregisterdiscount: number;
+}) {
   return (
     <div className='bg-gradient-to-r from-orange-600 to-red-600 font-[sans-serif] p-6 mb-5'>
       <div className='container mx-auto flex flex-col justify-center items-center'>
@@ -97,12 +108,12 @@ function GuestBanner(props: { discount: number; maxregisterdiscount: number }) {
           Get Exclusive Discounts!
         </h2>
         <p className='text-white font-thin text-center mb-6 text-xs'>
-          Hey! guest user. You are getting {props.discount}% discount
+          Hey! guest user. You are getting {discount}% discount
         </p>
         <p className='text-white text-base text-center mb-6'>
           Want a discount? Sign in now to get up to a{' '}
           <span className='underline font-bold'>
-            {props.maxregisterdiscount}% discount
+            {maxregisterdiscount}% discount
           </span>{' '}
           on this purchase.
         </p>
@@ -195,7 +206,7 @@ export function DiscountBanner({
     }
 
     return (
-      <RegisterBanner
+      <RegisterDiscountBanner
         discount={discount}
         maxregisterdiscount={MAX_REGISTER_DISCOUNT}
         maxvipdiscount={MAX_VIP_DISCOUNT}
@@ -206,7 +217,7 @@ export function DiscountBanner({
     if (totalQuantity) {
       discount = guestDiscount;
       return (
-        <GuestBanner
+        <GuestDiscountBanner
           discount={discount}
           maxregisterdiscount={MAX_REGISTER_DISCOUNT}
         />
