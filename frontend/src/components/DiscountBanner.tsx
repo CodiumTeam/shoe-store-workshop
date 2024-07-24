@@ -1,11 +1,12 @@
 import { Product } from '../products.ts';
+import { UserType } from '../models/UserType.ts';
 
 export function DiscountBanner({
   products,
   userType,
 }: {
   products: Array<Product>;
-  userType: 'VIP' | 'register' | 'guest';
+  userType: UserType;
 }) {
   let totalQuantity = 0;
   let tmpDiscount = 0;

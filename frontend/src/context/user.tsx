@@ -1,8 +1,9 @@
 import { createContext, ReactNode, useContext, useState } from 'react';
+import { UserType } from '../models/UserType.ts';
 
 interface UserContextType {
   email: string;
-  type: 'VIP' | 'register' | 'guest';
+  type: UserType;
 }
 
 interface UserContextValue extends UserContextType {
@@ -19,13 +20,12 @@ const UserContext = createContext<UserContextValue>({
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
   const email = window.sessionStorage.getItem('email') || '';
-  const type: 'VIP' | 'register' | 'guest' =
-    (window.sessionStorage.getItem('type') as 'VIP' | 'register' | 'guest') ||
-    'guest';
+  const type: UserType =
+    (window.sessionStorage.getItem('type') as UserType) || 'guest';
   const [user, setUser] = useState<UserContextType>({ email, type });
 
   const logIn = (email: string) => {
-    let type: 'VIP' | 'register' | 'guest' = 'register';
+    let type: UserType = 'register';
     if (email.includes('vip@')) {
       type = 'VIP';
     }
