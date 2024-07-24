@@ -1,13 +1,10 @@
 import { Product } from '../products.ts';
 import { UserType } from '../models/UserType.ts';
 
-function DiscountVipBanner({
-  discount,
-  maxvipdiscount,
-}: {
-  discount: number;
-  maxvipdiscount: number;
-}) {
+const MAX_REGISTER_DISCOUNT = 10;
+const MAX_VIP_DISCOUNT = 25;
+
+function DiscountVipBanner({ discount }: { discount: number }) {
   return (
     <div className='bg-indigo-900 text-center py-4 lg:px-4 mb-4'>
       <div
@@ -20,11 +17,11 @@ function DiscountVipBanner({
         <p className='font-semibold mr-2 text-left flex-auto'>
           As a valued <strong>VIP member</strong>, enjoy a special discount of{' '}
           {discount}% on all purchases.{' '}
-          {discount !== maxvipdiscount && (
+          {discount !== MAX_VIP_DISCOUNT && (
             <>
               <br />
               <span className='font-normal mr-2 mt-2 inline-block text-left flex-auto'>
-                Add more products to get {maxvipdiscount}% on this purchase
+                Add more products to get {MAX_VIP_DISCOUNT}% on this purchase
               </span>
             </>
           )}
@@ -34,15 +31,7 @@ function DiscountVipBanner({
   );
 }
 
-function RegisterDiscountBanner({
-  discount,
-  maxregisterdiscount,
-  maxvipdiscount,
-}: {
-  discount: number;
-  maxregisterdiscount: number;
-  maxvipdiscount: number;
-}) {
+function RegisterDiscountBanner({ discount }: { discount: number }) {
   return (
     <div className='bg-gradient-to-r  from-purple-600 to-blue-600 font-[sans-serif] p-6 mb-5'>
       <div className='container mx-auto flex flex-col justify-center items-center'>
@@ -54,9 +43,9 @@ function RegisterDiscountBanner({
             You are getting {discount}% now.
             <br />
           </span>
-          {discount !== maxregisterdiscount && (
+          {discount !== MAX_REGISTER_DISCOUNT && (
             <span>
-              Add more products to get {maxregisterdiscount}% on this purchase
+              Add more products to get {MAX_REGISTER_DISCOUNT}% on this purchase
             </span>
           )}
         </p>
@@ -64,7 +53,7 @@ function RegisterDiscountBanner({
         <p className='text-white text-base text-center mb-6'>
           Upgrade your account to VIP and get{' '}
           <span className='underline font-bold'>
-            {maxvipdiscount}% discount
+            {MAX_VIP_DISCOUNT}% discount
           </span>{' '}
           for this purchase.
         </p>
@@ -94,13 +83,7 @@ function RegisterDiscountBanner({
   );
 }
 
-function GuestDiscountBanner({
-  discount,
-  maxregisterdiscount,
-}: {
-  discount: number;
-  maxregisterdiscount: number;
-}) {
+function GuestDiscountBanner({ discount }: { discount: number }) {
   return (
     <div className='bg-gradient-to-r from-orange-600 to-red-600 font-[sans-serif] p-6 mb-5'>
       <div className='container mx-auto flex flex-col justify-center items-center'>
@@ -113,7 +96,7 @@ function GuestDiscountBanner({
         <p className='text-white text-base text-center mb-6'>
           Want a discount? Sign in now to get up to a{' '}
           <span className='underline font-bold'>
-            {maxregisterdiscount}% discount
+            {MAX_REGISTER_DISCOUNT}% discount
           </span>{' '}
           on this purchase.
         </p>
@@ -152,8 +135,7 @@ export function DiscountBanner({
   let totalQuantity = 0;
   let tmpDiscount = 0;
   let discount = 0;
-  const MAX_REGISTER_DISCOUNT = 10;
-  const MAX_VIP_DISCOUNT = 25;
+
   for (let index = 0; index < products.length; index++) {
     totalQuantity += products[index].quantity;
   }
@@ -179,12 +161,7 @@ export function DiscountBanner({
       tmpDiscount += 5; // VIP customers get an additional 5% discount
     }
     discount = tmpDiscount;
-    return (
-      <DiscountVipBanner
-        discount={discount}
-        maxvipdiscount={MAX_VIP_DISCOUNT}
-      />
-    );
+    return <DiscountVipBanner discount={discount} />;
   } else if (userType === UserType.REGISTER) {
     let discountPercent = 0;
     if (totalQuantity <= 3) {
@@ -205,23 +182,12 @@ export function DiscountBanner({
       }
     }
 
-    return (
-      <RegisterDiscountBanner
-        discount={discount}
-        maxregisterdiscount={MAX_REGISTER_DISCOUNT}
-        maxvipdiscount={MAX_VIP_DISCOUNT}
-      />
-    );
+    return <RegisterDiscountBanner discount={discount} />;
   } else if (userType === UserType.GUEST) {
     const guestDiscount = 0;
     if (totalQuantity) {
       discount = guestDiscount;
-      return (
-        <GuestDiscountBanner
-          discount={discount}
-          maxregisterdiscount={MAX_REGISTER_DISCOUNT}
-        />
-      );
+      return <GuestDiscountBanner discount={discount} />;
     }
   }
 
