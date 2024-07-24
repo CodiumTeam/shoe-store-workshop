@@ -1,5 +1,5 @@
 export enum UserType {
-  vip = 'VIP',
-  register = 'register',
-  guest = 'guest',
+  VIP = 'VIP',
+  REGISTER = 'register',
+  GUEST = 'guest',
 }
