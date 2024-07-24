@@ -17,7 +17,7 @@ export function DiscountBanner({
     totalQuantity += products[index].quantity;
   }
 
-  if (userType === 'VIP') {
+  if (userType === UserType.vip) {
     let result = 0;
     switch (totalQuantity) {
       case 0:
@@ -62,7 +62,7 @@ export function DiscountBanner({
         </div>
       </div>
     );
-  } else if (userType === 'register') {
+  } else if (userType === UserType.register) {
     let discountPercent = 0;
     if (totalQuantity <= 3) {
       if (totalQuantity === 1) {
@@ -132,7 +132,7 @@ export function DiscountBanner({
         </div>
       </div>
     );
-  } else if (userType === 'guest') {
+  } else if (userType === UserType.guest) {
     const guestDiscount = 0;
     if (totalQuantity) {
       discount = guestDiscount;

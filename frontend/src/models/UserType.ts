@@ -1,1 +1,5 @@
-export type UserType = 'VIP' | 'register' | 'guest';
+export enum UserType {
+  vip = 'VIP',
+  register = 'register',
+  guest = 'guest',
+}
