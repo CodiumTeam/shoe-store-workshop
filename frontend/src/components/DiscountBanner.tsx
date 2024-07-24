@@ -136,11 +136,11 @@ export function DiscountBanner({
 }) {
   const discount = getDiscount(products, userType);
 
-  if (userType === UserType.VIP) {
+  if (UserType.isVip(userType)) {
     return <DiscountVipBanner discount={discount} />;
-  } else if (userType === UserType.REGISTER) {
+  } else if (UserType.isRegister(userType)) {
     return <RegisterDiscountBanner discount={discount} />;
-  } else if (userType === UserType.GUEST) {
+  } else if (UserType.isGuest(userType)) {
     return <GuestDiscountBanner discount={discount} />;
   }
 
