@@ -161,7 +161,6 @@ export function DiscountBanner({
       tmpDiscount += 5; // VIP customers get an additional 5% discount
     }
     discount = tmpDiscount;
-    return <DiscountVipBanner discount={discount} />;
   } else if (userType === UserType.REGISTER) {
     let discountPercent = 0;
     if (totalQuantity <= 3) {
@@ -181,14 +180,19 @@ export function DiscountBanner({
         discount = discountPercent;
       }
     }
-
-    return <RegisterDiscountBanner discount={discount} />;
   } else if (userType === UserType.GUEST) {
     const guestDiscount = 0;
     if (totalQuantity) {
       discount = guestDiscount;
-      return <GuestDiscountBanner discount={discount} />;
     }
+  }
+
+  if (userType === UserType.VIP) {
+    return <DiscountVipBanner discount={discount} />;
+  } else if (userType === UserType.REGISTER) {
+    return <RegisterDiscountBanner discount={discount} />;
+  } else if (userType === UserType.GUEST) {
+    return <GuestDiscountBanner discount={discount} />;
   }
 
   return null;
