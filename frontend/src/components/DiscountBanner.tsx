@@ -125,13 +125,10 @@ function GuestDiscountBanner({ discount }: { discount: number }) {
   );
 }
 
-export function DiscountBanner({
-  products,
-  userType,
-}: {
-  products: Array<Product>;
-  userType: UserType;
-}) {
+function getDiscount(
+  products: Array<Product>,
+  userType: UserType | UserType.REGISTER | UserType.GUEST
+) {
   let totalQuantity = 0;
   let tmpDiscount = 0;
   let discount = 0;
@@ -186,6 +183,17 @@ export function DiscountBanner({
       discount = guestDiscount;
     }
   }
+  return discount;
+}
+
+export function DiscountBanner({
+  products,
+  userType,
+}: {
+  products: Array<Product>;
+  userType: UserType;
+}) {
+  const discount = getDiscount(products, userType);
 
   if (userType === UserType.VIP) {
     return <DiscountVipBanner discount={discount} />;
