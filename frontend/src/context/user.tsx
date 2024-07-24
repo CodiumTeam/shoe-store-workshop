@@ -13,7 +13,7 @@ interface UserContextValue extends UserContextType {
 
 const UserContext = createContext<UserContextValue>({
   email: '',
-  type: UserType.guest,
+  type: UserType.GUEST,
   logIn: () => {},
   logOut: () => {},
 });
@@ -21,13 +21,13 @@ const UserContext = createContext<UserContextValue>({
 export const UserProvider = ({ children }: { children: ReactNode }) => {
   const email = window.sessionStorage.getItem('email') || '';
   const type: UserType =
-    (window.sessionStorage.getItem('type') as UserType) || UserType.guest;
+    (window.sessionStorage.getItem('type') as UserType) || UserType.GUEST;
   const [user, setUser] = useState<UserContextType>({ email, type });
 
   const logIn = (email: string) => {
-    let type: UserType = UserType.register;
+    let type: UserType = UserType.REGISTER;
     if (email.includes('vip@')) {
-      type = UserType.vip;
+      type = UserType.VIP;
     }
 
     setUser({ email, type });
@@ -36,7 +36,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const logOut = () => {
-    setUser({ email: '', type: UserType.guest });
+    setUser({ email: '', type: UserType.GUEST });
     window.sessionStorage.removeItem('email');
     window.sessionStorage.removeItem('type');
   };
