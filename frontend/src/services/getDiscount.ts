@@ -5,61 +5,30 @@ export const MAX_REGISTER_DISCOUNT = 10;
 export const MAX_VIP_DISCOUNT = 25;
 
 function calculateVipDiscount(totalQuantity: number) {
-  let tmpDiscount = 0;
-  let result = 0;
-  switch (totalQuantity) {
-    case 0:
-      result = 0;
-      break;
-    case 1:
-      result = 5;
-      break;
-    case 2:
-      result = 10;
-      break;
-    default:
-      result = 20;
-      break;
-  }
-  tmpDiscount = result;
-  if (totalQuantity) {
-    tmpDiscount += 5; // VIP customers get an additional 5% discount
-  }
-  return tmpDiscount;
+  if (totalQuantity === 0) return 0;
+  const EXTRA_VIP_DISCOUNT = 5;
+  const discounts: Record<number, number> = {
+    1: 5,
+    2: 10,
+  };
+
+  return (discounts[totalQuantity] || 20) + EXTRA_VIP_DISCOUNT;
 }
 
 function calculateRegisterDiscount(totalQuantity: number) {
-  let discount = 0;
+  if (totalQuantity === 0) return 0;
 
-  let discountPercent = 0;
-  if (totalQuantity <= 3) {
-    if (totalQuantity === 1) {
-      discountPercent = 2;
-    } else if (totalQuantity === 2) {
-      discountPercent = 5;
-    } else if (totalQuantity === 3) {
-      discountPercent = MAX_REGISTER_DISCOUNT;
-    }
-    if (totalQuantity) {
-      discount = discountPercent;
-    }
-  } else {
-    discountPercent = MAX_REGISTER_DISCOUNT;
-    if (totalQuantity) {
-      discount = discountPercent;
-    }
-  }
-  return discount;
+  const discounts: Record<number, number> = {
+    1: 2,
+    2: 5,
+    3: MAX_REGISTER_DISCOUNT,
+  };
+
+  return discounts[totalQuantity] || MAX_REGISTER_DISCOUNT;
 }
 
-function calculateGuestDiscount(totalQuantity: number) {
-  let discount = 0;
-
-  const guestDiscount = 0;
-  if (totalQuantity) {
-    discount = guestDiscount;
-  }
-  return discount;
+function calculateGuestDiscount() {
+  return 0;
 }
 
 function calculateTotalQuantity(products: Array<Product>) {
@@ -82,7 +51,7 @@ export function getDiscount(
   } else if (UserType.isRegister(userType)) {
     discount = calculateRegisterDiscount(totalQuantity);
   } else if (UserType.isGuest(userType)) {
-    discount = calculateGuestDiscount(totalQuantity);
+    discount = calculateGuestDiscount();
   }
 
   return discount;
