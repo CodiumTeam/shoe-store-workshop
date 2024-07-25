@@ -21,6 +21,9 @@ export function CartPriceSummary({ products }: { products: Array<Product> }) {
         </div>
         <div className='flex items-center justify-between'>
           <p className='text-sm font-medium text-gray-900'>Discount</p>
+          <p className='font-semibold text-red-500' id='subtotal'>
+            0 €
+          </p>
         </div>
       </div>
       <div className='mt-6 flex items-center justify-between'>
