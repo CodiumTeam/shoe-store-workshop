@@ -1,13 +1,34 @@
 import { useUser } from '../context/user.tsx';
 import { DiscountBanner } from '../components/DiscountBanner.tsx';
 import { useCart } from '../context/cart.tsx';
-import { calculateTotal, reserveProducts } from '../products.ts';
+import { calculateTotal, Product, reserveProducts } from '../products.ts';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Navbar } from '../components/Navbar.tsx';
 import { CartStepper } from '../components/CartStepper.tsx';
 import { CartShippingSelector } from '../components/CartShippingSelector.tsx';
 import { CartProductSummary } from '../components/CartProductSummary.tsx';
+
+export function CartPriceSummary({ products }: { products: Array<Product> }) {
+  return (
+    <div className=''>
+      <div className='mt-6 border-t border-b py-2'>
+        <div className='flex items-center justify-between'>
+          <p className='text-sm font-medium text-gray-900'>Subtotal</p>
+          <p className='font-semibold text-gray-900' id='subtotal'>
+            {calculateTotal(products).toFixed(2)} €
+          </p>
+        </div>
+      </div>
+      <div className='mt-6 flex items-center justify-between'>
+        <p className='text-sm font-medium text-gray-900'>Total</p>
+        <p className='text-2xl font-semibold text-gray-900' id='total'>
+          {calculateTotal(products).toFixed(2)} €
+        </p>
+      </div>
+    </div>
+  );
+}
 
 export function Cart() {
   const { type: userType } = useUser();
@@ -53,22 +74,7 @@ export function Cart() {
           <p className='text-gray-400'>
             Complete your order by providing your payment details.
           </p>
-          <div className=''>
-            <div className='mt-6 border-t border-b py-2'>
-              <div className='flex items-center justify-between'>
-                <p className='text-sm font-medium text-gray-900'>Subtotal</p>
-                <p className='font-semibold text-gray-900' id='subtotal'>
-                  {calculateTotal(products).toFixed(2)} €
-                </p>
-              </div>
-            </div>
-            <div className='mt-6 flex items-center justify-between'>
-              <p className='text-sm font-medium text-gray-900'>Total</p>
-              <p className='text-2xl font-semibold text-gray-900' id='total'>
-                {calculateTotal(products).toFixed(2)} €
-              </p>
-            </div>
-          </div>
+          <CartPriceSummary products={products} />
           <button
             className='mt-4 mb-8 w-full rounded-md bg-gray-900 px-6 py-3 font-medium text-white'
             onClick={handleConfirm}
