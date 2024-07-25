@@ -19,6 +19,9 @@ export function CartPriceSummary({ products }: { products: Array<Product> }) {
             {calculateTotal(products).toFixed(2)} €
           </p>
         </div>
+        <div className='flex items-center justify-between'>
+          <p className='text-sm font-medium text-gray-900'>Discount</p>
+        </div>
       </div>
       <div className='mt-6 flex items-center justify-between'>
         <p className='text-sm font-medium text-gray-900'>Total</p>
