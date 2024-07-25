@@ -25,3 +25,4 @@ dist-ssr
 cypress-image-diff-screenshots/comparison
 cypress-image-diff-screenshots/diff
 coverage
+cypress/downloads
