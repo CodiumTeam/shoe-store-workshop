@@ -9,41 +9,21 @@ describe('getDiscount', () => {
     expect(result).toEqual(0);
   });
 
-  it('Should return 0 when a a guest user buy 1 product', () => {
-    const a_quantity = 1;
-    const a_product: Product = createSampleProduct(a_quantity);
+  test.each([
+    [0, 1],
+    [0, 2],
+    [0, 3],
+    [0, 4],
+  ])(
+    'Should return %d when a guest user buy %d product',
+    (expectedDiscount, quantity) => {
+      const a_product: Product = createSampleProduct(quantity);
 
-    const result = getDiscount([a_product], UserType.GUEST);
+      const result = getDiscount([a_product], UserType.GUEST);
 
-    expect(result).toBe(0);
-  });
-
-  it('Should return 0 when a guest user buy 2 product', () => {
-    const a_quantity = 2;
-    const a_product: Product = createSampleProduct(a_quantity);
-
-    const result = getDiscount([a_product], UserType.GUEST);
-
-    expect(result).toEqual(0);
-  });
-
-  it('Should return 0 when a guest user buy 3 product', () => {
-    const a_quantity = 3;
-    const a_product: Product = createSampleProduct(a_quantity);
-
-    const result = getDiscount([a_product], UserType.GUEST);
-
-    expect(result).toEqual(0);
-  });
-
-  it('Should return 0 when a guest user buy 4 product', () => {
-    const a_quantity = 4;
-    const a_product: Product = createSampleProduct(a_quantity);
-
-    const result = getDiscount([a_product], UserType.GUEST);
-
-    expect(result).toEqual(0);
-  });
+      expect(result).toBe(expectedDiscount);
+    }
+  );
 
   it('Should return 0 when a register user buy 0 product', () => {
     const result = getDiscount([], UserType.REGISTER);
@@ -51,41 +31,21 @@ describe('getDiscount', () => {
     expect(result).toEqual(0);
   });
 
-  it('Should return 2 when a register user buy 1 product', () => {
-    const a_quantity = 1;
-    const a_product: Product = createSampleProduct(a_quantity);
+  test.each([
+    [2, 1],
+    [5, 2],
+    [10, 3],
+    [10, 4],
+  ])(
+    'Should return %d when a register user buy %d product',
+    (expectedDiscount, quantity) => {
+      const a_product: Product = createSampleProduct(quantity);
 
-    const result = getDiscount([a_product], UserType.REGISTER);
+      const result = getDiscount([a_product], UserType.REGISTER);
 
-    expect(result).toEqual(2);
-  });
-
-  it('Should return 5 when a register user buy 2 product', () => {
-    const a_quantity = 2;
-    const a_product: Product = createSampleProduct(a_quantity);
-
-    const result = getDiscount([a_product], UserType.REGISTER);
-
-    expect(result).toEqual(5);
-  });
-
-  it('Should return 10 when a register user buy 3 product', () => {
-    const a_quantity = 3;
-    const a_product: Product = createSampleProduct(a_quantity);
-
-    const result = getDiscount([a_product], UserType.REGISTER);
-
-    expect(result).toEqual(10);
-  });
-
-  it('Should return 10 when a register user buy 4 product', () => {
-    const a_quantity = 4;
-    const a_product: Product = createSampleProduct(a_quantity);
-
-    const result = getDiscount([a_product], UserType.REGISTER);
-
-    expect(result).toEqual(10);
-  });
+      expect(result).toBe(expectedDiscount);
+    }
+  );
 
   it('Should return 0 when a VIP user buy 0 product', () => {
     const result = getDiscount([], UserType.VIP);
@@ -93,41 +53,21 @@ describe('getDiscount', () => {
     expect(result).toEqual(0);
   });
 
-  it('Should return 10 when a VIP user buy 1 product', () => {
-    const a_quantity = 1;
-    const a_product: Product = createSampleProduct(a_quantity);
+  test.each([
+    [10, 1],
+    [15, 2],
+    [25, 3],
+    [25, 4],
+  ])(
+    'Should return %d when a VIP user buy %d product',
+    (expectedDiscount, quantity) => {
+      const a_product: Product = createSampleProduct(quantity);
 
-    const result = getDiscount([a_product], UserType.VIP);
+      const result = getDiscount([a_product], UserType.VIP);
 
-    expect(result).toEqual(10);
-  });
-
-  it('Should return 15 when a VIP user buy 2 product', () => {
-    const a_quantity = 2;
-    const a_product: Product = createSampleProduct(a_quantity);
-
-    const result = getDiscount([a_product], UserType.VIP);
-
-    expect(result).toEqual(15);
-  });
-
-  it('Should return 25 when a VIP user buy 3 product', () => {
-    const a_quantity = 3;
-    const a_product: Product = createSampleProduct(a_quantity);
-
-    const result = getDiscount([a_product], UserType.VIP);
-
-    expect(result).toEqual(25);
-  });
-
-  it('Should return 25 when a VIP user buy 4 product', () => {
-    const a_quantity = 4;
-    const a_product: Product = createSampleProduct(a_quantity);
-
-    const result = getDiscount([a_product], UserType.VIP);
-
-    expect(result).toEqual(25);
-  });
+      expect(result).toBe(expectedDiscount);
+    }
+  );
 });
 
 function createSampleProduct(a_quantity: number) {
