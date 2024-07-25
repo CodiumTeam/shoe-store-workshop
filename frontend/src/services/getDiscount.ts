@@ -52,7 +52,9 @@ function calculateRegisterDiscount(totalQuantity: number) {
   return discount;
 }
 
-function calculateGuestDiscount(totalQuantity: number, discount: number) {
+function calculateGuestDiscount(totalQuantity: number) {
+  let discount = 0;
+
   const guestDiscount = 0;
   if (totalQuantity) {
     discount = guestDiscount;
@@ -80,7 +82,7 @@ export function getDiscount(
   } else if (UserType.isRegister(userType)) {
     discount = calculateRegisterDiscount(totalQuantity);
   } else if (UserType.isGuest(userType)) {
-    discount = calculateGuestDiscount(totalQuantity, discount);
+    discount = calculateGuestDiscount(totalQuantity);
   }
 
   return discount;
