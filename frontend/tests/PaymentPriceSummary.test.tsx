@@ -33,6 +33,16 @@ describe('PaymentPriceSummary', () => {
 
     expect(screen.getByText('2 €')).toBeVisible();
   });
+
+  it('Should render total to pay with discount', () => {
+    const product: Product = createSampleProduct(100, 1);
+
+    render(
+      <PaymentPriceSummary products={[product]} userType={UserType.REGISTER} />
+    );
+
+    expect(screen.getByText('98 €')).toBeVisible();
+  });
 });
 
 function createSampleProduct(price: number, quantity: number) {
