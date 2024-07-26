@@ -13,10 +13,10 @@ import { calculateDiscount } from '../services/calculateDiscount.ts';
 
 export function CartPriceSummary({
   products,
-  userType = UserType.GUEST,
+  userType,
 }: {
   products: Array<Product>;
-  userType?: UserType;
+  userType: UserType;
 }) {
   return (
     <div className=''>
@@ -88,7 +88,7 @@ export function Cart() {
           <p className='text-gray-400'>
             Complete your order by providing your payment details.
           </p>
-          <CartPriceSummary products={products} />
+          <CartPriceSummary products={products} userType={userType} />
           <button
             className='mt-4 mb-8 w-full rounded-md bg-gray-900 px-6 py-3 font-medium text-white'
             onClick={handleConfirm}
