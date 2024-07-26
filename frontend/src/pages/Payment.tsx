@@ -25,6 +25,12 @@ export function PaymentPriceSummary({
       </div>
 
       <dl className='flex items-center justify-between gap-4 border-t border-gray-200 pt-2'>
+        <dt className='text-base font-bold text-gray-900' id='totalPrice'>
+          Savings
+        </dt>
+      </dl>
+
+      <dl className='flex items-center justify-between gap-4 border-t border-gray-200 pt-2'>
         <dt className='text-base font-bold text-gray-900'>Total</dt>
         <dd className='text-base font-bold text-gray-900' id='totalPrice'>
           {calculateTotal(products).toFixed(2)} €
@@ -153,7 +159,7 @@ export function PaymentPage() {
                       type='number'
                       id='cvv-input'
                       aria-describedby='helper-text-explanation'
-                      className='block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-500 focus:ring-gray-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-gray-500 dark:focus:ring-gray-500'
+                      className='block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-500 focus:ring-gray-500'
                       placeholder='•••'
                       required
                     />
