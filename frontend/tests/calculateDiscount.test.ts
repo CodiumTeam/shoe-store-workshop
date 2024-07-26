@@ -1,6 +1,5 @@
 import { UserType } from '../src/models/UserType.ts';
-import { calculateTotal, Product } from '../src/products.ts';
-import { getDiscount } from '../src/services/getDiscount.ts';
+import { calculateDiscount } from '../src/services/calculateDiscount.ts';
 
 describe('calculateDiscount', () => {
   it('Should calculate total discount of a guest user', () => {
@@ -36,13 +35,6 @@ describe('calculateDiscount', () => {
     expect(result).toBe(10);
   });
 });
-
-function calculateDiscount(products: Array<Product>, userType: UserType) {
-  const total = calculateTotal(products);
-  const discount = getDiscount(products, userType);
-
-  return total * (discount / 100);
-}
 
 function createSampleProduct(price: number, a_quantity: number) {
   return {
