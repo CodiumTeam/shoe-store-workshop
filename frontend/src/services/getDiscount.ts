@@ -39,10 +39,7 @@ function calculateTotalQuantity(products: Array<Product>) {
   return totalQuantity;
 }
 
-export function getDiscount(
-  products: Array<Product>,
-  userType: UserType | UserType.REGISTER | UserType.GUEST
-) {
+export function getDiscount(products: Array<Product>, userType: UserType) {
   const totalQuantity = calculateTotalQuantity(products);
   let discount = 0;
 
