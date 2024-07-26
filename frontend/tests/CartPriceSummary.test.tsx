@@ -12,7 +12,7 @@ describe('CartPriceSummary', () => {
       image: 'https://a_product/a.png',
     };
 
-    render(<CartPriceSummary products={[product]} />);
+    render(<CartPriceSummary products={[product]} userType={UserType.GUEST} />);
 
     expect(screen.getByText('Discount')).toBeVisible();
   });
@@ -25,7 +25,7 @@ describe('CartPriceSummary', () => {
       image: 'https://a_product/a.png',
     };
 
-    render(<CartPriceSummary products={[product]} />);
+    render(<CartPriceSummary products={[product]} userType={UserType.GUEST} />);
 
     expect(screen.getByText('0 €')).toBeVisible();
   });
