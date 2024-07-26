@@ -26,6 +26,12 @@ export function PaymentPriceSummary({
 
       <dl className='flex items-center justify-between gap-4 border-t border-gray-200 pt-2 dark:border-gray-700'>
         <dt className='text-base font-bold text-gray-900 dark:text-white'>
+          Savings
+        </dt>
+      </dl>
+
+      <dl className='flex items-center justify-between gap-4 border-t border-gray-200 pt-2 dark:border-gray-700'>
+        <dt className='text-base font-bold text-gray-900 dark:text-white'>
           Total
         </dt>
         <dd
