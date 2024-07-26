@@ -8,8 +8,16 @@ import { Navbar } from '../components/Navbar.tsx';
 import { CartStepper } from '../components/CartStepper.tsx';
 import { CartShippingSelector } from '../components/CartShippingSelector.tsx';
 import { CartProductSummary } from '../components/CartProductSummary.tsx';
+import { UserType } from '../models/UserType.ts';
+import { calculateDiscount } from '../services/calculateDiscount.ts';
 
-export function CartPriceSummary({ products }: { products: Array<Product> }) {
+export function CartPriceSummary({
+  products,
+  userType = UserType.GUEST,
+}: {
+  products: Array<Product>;
+  userType?: UserType;
+}) {
   return (
     <div className=''>
       <div className='mt-6 border-t border-b py-2'>
@@ -22,7 +30,7 @@ export function CartPriceSummary({ products }: { products: Array<Product> }) {
         <div className='flex items-center justify-between'>
           <p className='text-sm font-medium text-gray-900'>Discount</p>
           <p className='font-semibold text-red-500' id='subtotal'>
-            0 €
+            {calculateDiscount(products, userType)} €
           </p>
         </div>
       </div>
