@@ -41,13 +41,7 @@ function calculateDiscount(products: Array<Product>, userType: UserType) {
   const total = calculateTotal(products);
   const discount = getDiscount(products, userType);
 
-  if (UserType.isRegister(userType)) {
-    return total * (discount / 100);
-  } else if (UserType.isVip(userType)) {
-    return total * (discount / 100);
-  }
-
-  return 0;
+  return total * (discount / 100);
 }
 
 function createSampleProduct(price: number, a_quantity: number) {
