@@ -26,6 +26,15 @@ describe('calculateDiscount', () => {
 
     expect(result).toBe(10);
   });
+
+  it('Should calculate total discount of a VIP user with 1 product', () => {
+    const result = calculateDiscount(
+      [createSampleProduct(100, 1)],
+      UserType.VIP
+    );
+
+    expect(result).toBe(10);
+  });
 });
 
 function calculateDiscount(products: Array<Product>, userType: UserType) {
@@ -33,6 +42,8 @@ function calculateDiscount(products: Array<Product>, userType: UserType) {
   const discount = getDiscount(products, userType);
 
   if (UserType.isRegister(userType)) {
+    return total * (discount / 100);
+  } else if (UserType.isVip(userType)) {
     return total * (discount / 100);
   }
 
