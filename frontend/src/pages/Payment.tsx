@@ -1,7 +1,38 @@
-import { calculateTotal, payCart } from '../products.ts';
+import { calculateTotal, payCart, Product } from '../products.ts';
 import { useCart } from '../context/cart.tsx';
 import { FormEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+export function PaymentPriceSummary({
+  products,
+}: {
+  products: Array<Product>;
+}) {
+  return (
+    <div className='space-y-4 rounded-lg border border-gray-100 bg-gray-50 p-6'>
+      <div className='space-y-2'>
+        <dl className='flex items-center justify-between gap-4'>
+          <dt className='text-base font-normal text-gray-500'>
+            Original price
+          </dt>
+          <dd
+            className='text-base font-medium text-gray-900'
+            id='originalPrice'
+          >
+            {calculateTotal(products).toFixed(2)} €
+          </dd>
+        </dl>
+      </div>
+
+      <dl className='flex items-center justify-between gap-4 border-t border-gray-200 pt-2'>
+        <dt className='text-base font-bold text-gray-900'>Total</dt>
+        <dd className='text-base font-bold text-gray-900' id='totalPrice'>
+          {calculateTotal(products).toFixed(2)} €
+        </dd>
+      </dl>
+    </div>
+  );
+}
 
 export function PaymentPage() {
   const { products } = useCart();
@@ -122,7 +153,7 @@ export function PaymentPage() {
                       type='number'
                       id='cvv-input'
                       aria-describedby='helper-text-explanation'
-                      className='block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-500 focus:ring-gray-500'
+                      className='block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-500 focus:ring-gray-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-gray-500 dark:focus:ring-gray-500'
                       placeholder='•••'
                       required
                     />
@@ -159,31 +190,7 @@ export function PaymentPage() {
               </form>
 
               <div className='mt-6 grow sm:mt-8 lg:mt-0'>
-                <div className='space-y-4 rounded-lg border border-gray-100 bg-gray-50 p-6'>
-                  <div className='space-y-2'>
-                    <dl className='flex items-center justify-between gap-4'>
-                      <dt className='text-base font-normal text-gray-500'>
-                        Original price
-                      </dt>
-                      <dd
-                        className='text-base font-medium text-gray-900'
-                        id='originalPrice'
-                      >
-                        {calculateTotal(products).toFixed(2)} €
-                      </dd>
-                    </dl>
-                  </div>
-
-                  <dl className='flex items-center justify-between gap-4 border-t border-gray-200 pt-2'>
-                    <dt className='text-base font-bold text-gray-900'>Total</dt>
-                    <dd
-                      className='text-base font-bold text-gray-900'
-                      id='totalPrice'
-                    >
-                      {calculateTotal(products).toFixed(2)} €
-                    </dd>
-                  </dl>
-                </div>
+                <PaymentPriceSummary products={products} />
 
                 <div className='mt-6 flex items-center justify-center gap-8'>
                   <img className='h-8 w-auto' src='/images/paypal.svg' alt='' />
