@@ -4,7 +4,7 @@ import { PaymentPriceSummary } from '../src/pages/Payment.tsx';
 
 describe('PaymentPriceSummary', () => {
   it('Should render savings text', () => {
-    const product: Product = createSampleProduct();
+    const product: Product = createSampleProduct(100, 1);
 
     render(<PaymentPriceSummary products={[product]} />);
 
@@ -12,7 +12,7 @@ describe('PaymentPriceSummary', () => {
   });
 
   it('Should render discount calculation text', () => {
-    const product: Product = createSampleProduct();
+    const product: Product = createSampleProduct(100, 1);
 
     render(<PaymentPriceSummary products={[product]} />);
 
@@ -20,11 +20,11 @@ describe('PaymentPriceSummary', () => {
   });
 });
 
-function createSampleProduct() {
+function createSampleProduct(price: number, quantity: number) {
   return {
     name: 'Test product',
-    quantity: 1,
-    price: 100,
+    quantity: quantity,
+    price: price,
     image: 'https://a_product/a.png',
   };
 }
