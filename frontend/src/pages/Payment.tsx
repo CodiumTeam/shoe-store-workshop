@@ -28,6 +28,12 @@ export function PaymentPriceSummary({
         <dt className='text-base font-bold text-gray-900' id='totalPrice'>
           Savings
         </dt>
+        <dd
+          className='text-base font-bold text-gray-900 dark:text-white'
+          id='totalPrice'
+        >
+          0 €
+        </dd>
       </dl>
 
       <dl className='flex items-center justify-between gap-4 border-t border-gray-200 pt-2'>

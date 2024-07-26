@@ -10,6 +10,14 @@ describe('PaymentPriceSummary', () => {
 
     expect(screen.getByText('Savings')).toBeVisible();
   });
+
+  it('Should render discount calculation text', () => {
+    const product: Product = createSampleProduct();
+
+    render(<PaymentPriceSummary products={[product]} />);
+
+    expect(screen.getByText('0 €')).toBeVisible();
+  });
 });
 
 function createSampleProduct() {
