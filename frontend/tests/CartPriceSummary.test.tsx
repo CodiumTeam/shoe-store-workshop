@@ -44,4 +44,17 @@ describe('CartPriceSummary', () => {
 
     expect(screen.getByText('2 €')).toBeVisible();
   });
+
+  it('Should render total discount for register user with 1 product', () => {
+    const product: Product = {
+      name: 'Test product',
+      quantity: 1,
+      price: 100,
+      image: 'https://a_product/a.png',
+    };
+
+    render(<CartPriceSummary products={[product]} userType={UserType.VIP} />);
+
+    expect(screen.getByText('10 €')).toBeVisible();
+  });
 });
