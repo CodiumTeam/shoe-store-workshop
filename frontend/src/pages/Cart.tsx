@@ -10,6 +10,7 @@ import { CartShippingSelector } from '../components/CartShippingSelector.tsx';
 import { CartProductSummary } from '../components/CartProductSummary.tsx';
 import { UserType } from '../models/UserType.ts';
 import { calculateDiscount } from '../services/calculateDiscount.ts';
+import { calculateTotalWithDiscount } from '../services/calculateTotalWithDiscount.ts';
 
 export function CartPriceSummary({
   products,
@@ -37,7 +38,7 @@ export function CartPriceSummary({
       <div className='mt-6 flex items-center justify-between'>
         <p className='text-sm font-medium text-gray-900'>Total</p>
         <p className='text-2xl font-semibold text-gray-900' id='total'>
-          {calculateTotal(products).toFixed(2)} €
+          {calculateTotalWithDiscount(products, userType).toFixed(2)} €
         </p>
       </div>
     </div>
