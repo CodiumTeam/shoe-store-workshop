@@ -21,7 +21,7 @@ describe('PaymentPriceSummary', () => {
       <PaymentPriceSummary products={[product]} userType={UserType.GUEST} />
     );
 
-    expect(screen.getByText('0 €')).toBeVisible();
+    expect(screen.getByText('0.00 €')).toBeVisible();
   });
 
   it('Should render discount calculation text as register user with 1 product', () => {
@@ -31,7 +31,7 @@ describe('PaymentPriceSummary', () => {
       <PaymentPriceSummary products={[product]} userType={UserType.REGISTER} />
     );
 
-    expect(screen.getByText('2 €')).toBeVisible();
+    expect(screen.getByText('2.00 €')).toBeVisible();
   });
 
   it('Should render total to pay with discount', () => {
@@ -41,7 +41,17 @@ describe('PaymentPriceSummary', () => {
       <PaymentPriceSummary products={[product]} userType={UserType.REGISTER} />
     );
 
-    expect(screen.getByText('98 €')).toBeVisible();
+    expect(screen.getByText('98.00 €')).toBeVisible();
+  });
+
+  it('Should render total to pay with discount with two decimals', () => {
+    const product: Product = createSampleProduct(100, 1);
+
+    render(
+      <PaymentPriceSummary products={[product]} userType={UserType.REGISTER} />
+    );
+
+    expect(screen.getByText('98.00 €')).toBeVisible();
   });
 });
 

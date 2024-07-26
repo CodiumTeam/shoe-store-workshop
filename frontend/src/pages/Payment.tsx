@@ -38,7 +38,7 @@ export function PaymentPriceSummary({
           className='text-base font-bold text-gray-900 dark:text-white'
           id='totalPrice'
         >
-          {calculateDiscount(products, userType)} €
+          {calculateDiscount(products, userType).toFixed(2)} €
         </dd>
       </dl>
 
@@ -50,7 +50,7 @@ export function PaymentPriceSummary({
           className='text-base font-bold text-gray-900 dark:text-white'
           id='totalPrice'
         >
-          {calculateTotalWithDiscount(products, userType)} €
+          {calculateTotalWithDiscount(products, userType).toFixed(2)} €
         </dd>
       </dl>
     </div>
