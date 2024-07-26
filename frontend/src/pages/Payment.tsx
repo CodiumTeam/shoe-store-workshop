@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { UserType } from '../models/UserType.ts';
 import { calculateDiscount } from '../services/calculateDiscount.ts';
 import { useUser } from '../context/user.tsx';
+import { calculateTotalWithDiscount } from '../services/calculateTotalWithDiscount.ts';
 
 export function PaymentPriceSummary({
   products,
@@ -33,10 +34,7 @@ export function PaymentPriceSummary({
         <dt className='text-base font-bold text-gray-900' id='totalPrice'>
           Savings
         </dt>
-        <dd
-          className='text-base font-bold text-gray-900 dark:text-white'
-          id='totalPrice'
-        >
+        <dd className='text-base font-bold text-gray-900' id='totalPrice'>
           {calculateDiscount(products, userType)} €
         </dd>
       </dl>
@@ -44,7 +42,7 @@ export function PaymentPriceSummary({
       <dl className='flex items-center justify-between gap-4 border-t border-gray-200 pt-2'>
         <dt className='text-base font-bold text-gray-900'>Total</dt>
         <dd className='text-base font-bold text-gray-900' id='totalPrice'>
-          {calculateTotal(products).toFixed(2)} €
+          {calculateTotalWithDiscount(products, userType)} €
         </dd>
       </dl>
     </div>
