@@ -7,7 +7,9 @@ describe('PaymentPriceSummary', () => {
   it('Should render savings text', () => {
     const product: Product = createSampleProduct(100, 1);
 
-    render(<PaymentPriceSummary products={[product]} />);
+    render(
+      <PaymentPriceSummary products={[product]} userType={UserType.GUEST} />
+    );
 
     expect(screen.getByText('Savings')).toBeVisible();
   });
@@ -15,7 +17,9 @@ describe('PaymentPriceSummary', () => {
   it('Should render discount calculation text', () => {
     const product: Product = createSampleProduct(100, 1);
 
-    render(<PaymentPriceSummary products={[product]} />);
+    render(
+      <PaymentPriceSummary products={[product]} userType={UserType.GUEST} />
+    );
 
     expect(screen.getByText('0 €')).toBeVisible();
   });
