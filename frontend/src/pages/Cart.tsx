@@ -30,7 +30,7 @@ export function CartPriceSummary({
         <div className='flex items-center justify-between'>
           <p className='text-sm font-medium text-gray-900'>Discount</p>
           <p className='font-semibold text-red-500' id='subtotal'>
-            {calculateDiscount(products, userType)} €
+            {calculateDiscount(products, userType).toFixed(2)} €
           </p>
         </div>
       </div>
