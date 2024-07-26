@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { Product } from '../src/products.ts';
 import { PaymentPriceSummary } from '../src/pages/Payment.tsx';
+import { UserType } from '../src/models/UserType.ts';
 
 describe('PaymentPriceSummary', () => {
   it('Should render savings text', () => {
@@ -17,6 +18,16 @@ describe('PaymentPriceSummary', () => {
     render(<PaymentPriceSummary products={[product]} />);
 
     expect(screen.getByText('0 €')).toBeVisible();
+  });
+
+  it('Should render discount calculation text as register user with 1 product', () => {
+    const product: Product = createSampleProduct(100, 1);
+
+    render(
+      <PaymentPriceSummary products={[product]} userType={UserType.REGISTER} />
+    );
+
+    expect(screen.getByText('2 €')).toBeVisible();
   });
 });
 
