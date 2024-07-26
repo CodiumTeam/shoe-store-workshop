@@ -20,7 +20,14 @@ describe('calculateTotalWithDiscount', () => {
     expect(result).toBe(98);
   });
 
-  it.todo('Should calculate the total with discount for VIP user', () => {});
+  it('Should calculate the total with discount for VIP user', () => {
+    const result = calculateTotalWithDiscount(
+      [createSampleProduct(100, 1)],
+      UserType.VIP
+    );
+
+    expect(result).toBe(90);
+  });
 });
 
 function calculateTotalWithDiscount(
@@ -29,6 +36,10 @@ function calculateTotalWithDiscount(
 ) {
   if (UserType.isRegister(userType)) {
     return 98;
+  }
+
+  if (UserType.isVip(userType)) {
+    return 90;
   }
   return 100;
 }
