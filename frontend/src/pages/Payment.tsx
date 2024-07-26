@@ -31,11 +31,11 @@ export function PaymentPriceSummary({
       </div>
 
       <dl className='flex items-center justify-between gap-4 border-t border-gray-200 pt-2 dark:border-gray-700'>
-        <dt className='text-base font-bold text-gray-900 dark:text-white'>
+        <dt className='text-base font-normal text-gray-500 dark:text-gray-400'>
           Savings
         </dt>
         <dd
-          className='text-base font-bold text-gray-900 dark:text-white'
+          className='text-base font-bold text-green-500 dark:text-white'
           id='totalPrice'
         >
           {calculateDiscount(products, userType).toFixed(2)} €
