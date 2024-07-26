@@ -35,14 +35,14 @@ export function PaymentPriceSummary({
           Savings
         </dt>
         <dd className='text-base font-bold text-gray-900' id='totalPrice'>
-          {calculateDiscount(products, userType)} €
+          {calculateDiscount(products, userType).toFixed(2)} €
         </dd>
       </dl>
 
       <dl className='flex items-center justify-between gap-4 border-t border-gray-200 pt-2'>
         <dt className='text-base font-bold text-gray-900'>Total</dt>
         <dd className='text-base font-bold text-gray-900' id='totalPrice'>
-          {calculateTotalWithDiscount(products, userType)} €
+          {calculateTotalWithDiscount(products, userType).toFixed(2)} €
         </dd>
       </dl>
     </div>
