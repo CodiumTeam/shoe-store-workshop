@@ -4,13 +4,14 @@ import { FormEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserType } from '../models/UserType.ts';
 import { calculateDiscount } from '../services/calculateDiscount.ts';
+import { useUser } from '../context/user.tsx';
 
 export function PaymentPriceSummary({
   products,
-  userType = UserType.GUEST,
+  userType,
 }: {
   products: Array<Product>;
-  userType?: UserType;
+  userType: UserType;
 }) {
   return (
     <div className='space-y-4 rounded-lg border border-gray-100 bg-gray-50 p-6'>
@@ -51,6 +52,7 @@ export function PaymentPriceSummary({
 }
 
 export function PaymentPage() {
+  const { type: userType } = useUser();
   const { products } = useCart();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
@@ -206,7 +208,7 @@ export function PaymentPage() {
               </form>
 
               <div className='mt-6 grow sm:mt-8 lg:mt-0'>
-                <PaymentPriceSummary products={products} />
+                <PaymentPriceSummary products={products} userType={userType} />
 
                 <div className='mt-6 flex items-center justify-center gap-8'>
                   <img className='h-8 w-auto' src='/images/paypal.svg' alt='' />
