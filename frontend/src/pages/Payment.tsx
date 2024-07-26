@@ -2,11 +2,15 @@ import { calculateTotal, payCart, Product } from '../products.ts';
 import { useCart } from '../context/cart.tsx';
 import { FormEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { UserType } from '../models/UserType.ts';
+import { calculateDiscount } from '../services/calculateDiscount.ts';
 
 export function PaymentPriceSummary({
   products,
+  userType = UserType.GUEST,
 }: {
   products: Array<Product>;
+  userType?: UserType;
 }) {
   return (
     <div className='space-y-4 rounded-lg border border-gray-100 bg-gray-50 p-6'>
@@ -32,7 +36,7 @@ export function PaymentPriceSummary({
           className='text-base font-bold text-gray-900 dark:text-white'
           id='totalPrice'
         >
-          0 €
+          {calculateDiscount(products, userType)} €
         </dd>
       </dl>
 
