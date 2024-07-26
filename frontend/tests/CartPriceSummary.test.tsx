@@ -70,4 +70,19 @@ describe('CartPriceSummary', () => {
 
     expect(screen.getByText('12.00 €')).toBeVisible();
   });
+
+  it('Should render total to pay with two decimals', () => {
+    const product: Product = {
+      name: 'Test product',
+      quantity: 1,
+      price: 100,
+      image: 'https://a_product/a.png',
+    };
+
+    render(
+      <CartPriceSummary products={[product]} userType={UserType.REGISTER} />
+    );
+
+    expect(screen.getByText('98.00 €')).toBeVisible();
+  });
 });
