@@ -1,7 +1,43 @@
-import { calculateTotal, payCart } from '../products.ts';
+import { calculateTotal, payCart, Product } from '../products.ts';
 import { useCart } from '../context/cart.tsx';
 import { FormEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+export function PaymentPriceSummary({
+  products,
+}: {
+  products: Array<Product>;
+}) {
+  return (
+    <div className='space-y-4 rounded-lg border border-gray-100 bg-gray-50 p-6 dark:border-gray-700 dark:bg-gray-800'>
+      <div className='space-y-2'>
+        <dl className='flex items-center justify-between gap-4'>
+          <dt className='text-base font-normal text-gray-500 dark:text-gray-400'>
+            Original price
+          </dt>
+          <dd
+            className='text-base font-medium text-gray-900 dark:text-white'
+            id='originalPrice'
+          >
+            {calculateTotal(products).toFixed(2)} €
+          </dd>
+        </dl>
+      </div>
+
+      <dl className='flex items-center justify-between gap-4 border-t border-gray-200 pt-2 dark:border-gray-700'>
+        <dt className='text-base font-bold text-gray-900 dark:text-white'>
+          Total
+        </dt>
+        <dd
+          className='text-base font-bold text-gray-900 dark:text-white'
+          id='totalPrice'
+        >
+          {calculateTotal(products).toFixed(2)} €
+        </dd>
+      </dl>
+    </div>
+  );
+}
 
 export function PaymentPage() {
   const { products } = useCart();
@@ -159,33 +195,7 @@ export function PaymentPage() {
               </form>
 
               <div className='mt-6 grow sm:mt-8 lg:mt-0'>
-                <div className='space-y-4 rounded-lg border border-gray-100 bg-gray-50 p-6 dark:border-gray-700 dark:bg-gray-800'>
-                  <div className='space-y-2'>
-                    <dl className='flex items-center justify-between gap-4'>
-                      <dt className='text-base font-normal text-gray-500 dark:text-gray-400'>
-                        Original price
-                      </dt>
-                      <dd
-                        className='text-base font-medium text-gray-900 dark:text-white'
-                        id='originalPrice'
-                      >
-                        {calculateTotal(products).toFixed(2)} €
-                      </dd>
-                    </dl>
-                  </div>
-
-                  <dl className='flex items-center justify-between gap-4 border-t border-gray-200 pt-2 dark:border-gray-700'>
-                    <dt className='text-base font-bold text-gray-900 dark:text-white'>
-                      Total
-                    </dt>
-                    <dd
-                      className='text-base font-bold text-gray-900 dark:text-white'
-                      id='totalPrice'
-                    >
-                      {calculateTotal(products).toFixed(2)} €
-                    </dd>
-                  </dl>
-                </div>
+                <PaymentPriceSummary products={products} />
 
                 <div className='mt-6 flex items-center justify-center gap-8'>
                   <img
