@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+    font-family:  sans-serif;
+}
+
 .loading {
     position: absolute;
     top: 0;
